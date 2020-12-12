@@ -1,35 +1,29 @@
 package ar.com.adatohn.wichiapp.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
-
 @Entity
 @Table(name = "delegada")
 public class Delegada {
     
     @Id
-    @Column(name = "delegada_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer delegadaId;
+    private Integer id;
+
     private String nombre;
+
     @OneToOne
     @JoinColumn(name = "comunidad_id", referencedColumnName = "comunidad_id")
     private Comunidad comunidad;
 
-    @OneToMany(mappedBy = "delegada", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Pedido> pedidos = new ArrayList<>();
+    private int telefono;
 
-
-
-    
-    public Integer getDelegadaId() {
-        return delegadaId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDelegadaId(Integer delegadaId) {
-        this.delegadaId = delegadaId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -46,17 +40,15 @@ public class Delegada {
 
     public void setComunidad(Comunidad comunidad) {
         this.comunidad = comunidad;
-        this.comunidad.setDelegada(this);
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
-
     
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
 
 }

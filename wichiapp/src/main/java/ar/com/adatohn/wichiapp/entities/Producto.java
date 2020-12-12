@@ -10,32 +10,23 @@ import javax.persistence.*;
 public class Producto {
  
     @Id
-    @Column(name = "producto_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer productoId;
+    private Integer id;
+
     private String nombre;
     private String descripcion;
-    private String collor;
-    private String tejido;
-    //TODO arreglar para armazenar imagen en servidor externo
-    @Lob
-    private byte imagem;
+    private String imagen;
     
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comunidad> comunidades = new ArrayList<>();
 
-    @OneToMany
-    @JoinColumn(name = "producto_id", referencedColumnName = "producto_id")
-    private Pedido pedido;
-
-
-
-    public Integer getProductoId() {
-        return productoId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setProductoId(Integer productoId) {
-        this.productoId = productoId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -54,30 +45,6 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public String getCollor() {
-        return collor;
-    }
-
-    public void setCollor(String collor) {
-        this.collor = collor;
-    }
-
-    public String getTejido() {
-        return tejido;
-    }
-
-    public void setTejido(String tejido) {
-        this.tejido = tejido;
-    }
-
-    public byte getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(byte imagem) {
-        this.imagem = imagem;
-    }
-
     public List<Comunidad> getComunidades() {
         return comunidades;
     }
@@ -88,17 +55,15 @@ public class Producto {
 
     public void agregarComunidade(Comunidad comunidad){
         this.comunidades.add(comunidad);
-        comunidad.setProducto(this);
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
-
 
  
 

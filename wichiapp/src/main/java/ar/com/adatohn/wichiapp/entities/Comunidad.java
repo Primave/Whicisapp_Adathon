@@ -1,33 +1,34 @@
 package ar.com.adatohn.wichiapp.entities;
 
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "comunidad")
 public class Comunidad {
- 
+
     @Id
-    @Column(name = "comunidad_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer comunidadId;
+    private Integer id;
     private String nombre;
-    @ManyToOne
-    @JoinColumn(name = "producto_id", referencedColumnName = "producto_id")
-    private Producto producto;
     
+    @ManyToMany
+    private Set<Producto> produccion;
+    
+    @ManyToMany
+    private Set<Producto> produccionActual;
+    
+
     @OneToOne(mappedBy = "comunidad", cascade = CascadeType.ALL)
     private Delegada delegada;
 
-
-
-
-
-    public Integer getComunidadId() {
-        return comunidadId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setComunidadId(Integer comunidadId) {
-        this.comunidadId = comunidadId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -38,20 +39,28 @@ public class Comunidad {
         this.nombre = nombre;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
     public Delegada getDelegada() {
         return delegada;
     }
 
     public void setDelegada(Delegada delegada) {
         this.delegada = delegada;
+    }
+
+    public Set<Producto> getProduccion() {
+        return produccion;
+    }
+
+    public void setProduccion(Set<Producto> produccion) {
+        this.produccion = produccion;
+    }
+
+    public Set<Producto> getProduccionActual() {
+        return produccionActual;
+    }
+
+    public void setProduccionActual(Set<Producto> produccionActual) {
+        this.produccionActual = produccionActual;
     }
 
 }
